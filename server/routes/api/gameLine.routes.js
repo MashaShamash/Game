@@ -1,15 +1,15 @@
 const router = require("express").Router();
-const { GameLine } = require("../../");
+const { GameLine, Question } = require("../../db/models");
+
 
 router.get("/", async (req, res) => {
   try {
-    const gameLine = await GameLine.findAll({ where: req.query });
+    const gameLine = await GameLine.findAll({
+      where: { gameId: res.locals.user.gameId },
+      include: Question
+    });
     res
       .status(200)
-      .cookie("cookie", "kek", {
-        maxAge: 9000,
-        httpOnly: true,
-      })
       .json({ message: "success", gameLine });
   } catch ({ message }) {
     res.status(500).json({ error: message });
@@ -28,7 +28,7 @@ router.get("/gameLineId", async (req, res) => {
 
 router.post("/", verifyAccessToken, async (req, res) => {
   try {
-    const { user } = res.locals;
+    const { user, gameId } = res.locals;
     const { gameId, questionId, gameLineStatus } = req.body;
     const gameLine = await GameLine.create({
       gameId,
@@ -44,27 +44,28 @@ router.post("/", verifyAccessToken, async (req, res) => {
   }
 });
 
-// router.put("/:gameLineId", verifyAccessToken, async (req, res) => {
-//   try {
-//     const { user } = res.locals;
+router.put("/:gameLineId", verifyAccessToken, async (req, res) => {
+  try {
+    const { user} = res.locals;
 
-//     const { gameLineId } = req.params;
-//     const { gameId, questionId, gameLineStatus } = req.body;
+    const { gameLineId } = req.params;
+    const { gameId, questionId, gameLineStatus } = req.body;
 
-//     const result = await GameLine.update(
-//       {gameId, questionId, gameLineStatus },
-//       { where: { id: gameLineId, questionId: question.id } }
-//     );
+    const result = await GameLine.update(
+      { gameId, questionId, gameLineStatus },
+      { where: { id: gameLineId, questionId: question.id } }
+    );
 
-//     if (result[0] > 0) {
-//       const gameLine = await GameLine.findOne({ where: { id: gameLineId } });
+    if (result[0] > 0) {
+      const gameLine = await GameLine.findOne({ where: { id: gameLineId } });
 
-//       res.status(200).json({ message: "success", gameLine });
-//       return;
-//     }
+      res.status(200).json({ message: "success", gameLine });
+      return;
+    }
 
-//     res.status(400).json({ message: "Ошибка!" });
-//   } catch ({ message }) {
-//     res.status(500).json({ error: message });
-//   }
-// });
+    res.status(400).json({ message: "Ошибка!" });
+  } catch ({ message }) {
+    res.status(500).json({ error: message });
+  }
+});
+module.exports = router;

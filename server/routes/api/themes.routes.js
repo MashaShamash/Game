@@ -25,3 +25,4 @@ router.get("/themeId", async (req, res) => {
     res.status(500).json({ error: message });
   }
 });
+module.exports = router;
