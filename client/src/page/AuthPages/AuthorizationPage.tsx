@@ -31,7 +31,7 @@ function AuthorizationPage(): JSX.Element {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button type="submit">login</button>
+      <button type="submit">Войти</button>
     </form>
   );
 }

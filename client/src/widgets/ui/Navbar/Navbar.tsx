@@ -10,19 +10,19 @@ function Navbar(): JSX.Element {
     <nav className="Navbar">
       <ul>
         <li>
-          <NavLink to="/">main</NavLink>
+          <NavLink to="/">Главная страница</NavLink>
         </li>
         {user ? (
           <li>
-            <NavLink to="/">logout</NavLink>
+            <NavLink to="/">Выйти</NavLink>
           </li>
         ) : (
           <>
             <li>
-              <NavLink to="/signIn">auth</NavLink>
+              <NavLink to="/authorization">Авторизация</NavLink>
             </li>
             <li>
-              <NavLink to="/signUp">rega</NavLink>
+              <NavLink to="/registration">Регистрация</NavLink>
             </li>
           </>
         )}
