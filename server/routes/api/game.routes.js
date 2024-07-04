@@ -4,7 +4,7 @@ const verifyAccessToken = require("../../middleware/verifyAccessToken");
 
 router.get("/", async (req, res) => {
   try {
-    const questions = await Game.findAll({ where: req.query });
+    const questions = await Game.findAll({ where: req.query, order: [["id", "ASC"]] });
     res
       .status(200)
       .cookie("cookie", "kek", {

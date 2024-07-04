@@ -3,7 +3,7 @@ const { Theme } = require("../../db/models");
 
 router.get("/", async (req, res) => {
   try {
-    const themes = await Theme.findAll({ where: req.query });
+    const themes = await Theme.findAll({ where: req.query, order: [["id", "ASC"]] });
     res
       .status(200)
       .cookie("cookie", "kek", {
