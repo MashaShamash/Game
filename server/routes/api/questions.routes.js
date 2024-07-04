@@ -3,7 +3,7 @@ const { Questions } = require("../../db/models");
 
 router.get("/", async (req, res) => {
   try {
-    const questions = await Questions.findAll({ where: req.query });
+    const questions = await Questions.findAll({ where: req.query, order: [["id", "ASC"]] });
     res
       .status(200)
       .cookie("cookie", "kek", {

@@ -8,7 +8,8 @@ router.get("/", async (req, res) => {
   try {
     const gameLine = await GameLine.findAll({
       where: { gameId: res.locals.user.gameId },
-      include: Question
+      include: Question,
+      order: [["id", "ASC"]]
     });
     res
       .status(200)
