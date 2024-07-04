@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import AuthorizationPage from '../../../page/AuthPages/AuthorizationPage';
 import RegistrationPage from '../../../page/AuthPages/RegistrationPage';
 import MainPage from '../../../page/MainPage/MainPage';
+import GamePage from '../../../page/GamePage/GamePage';
 
 function AppRoutes(): JSX.Element {
   return (
@@ -10,7 +11,7 @@ function AppRoutes(): JSX.Element {
       <Route path="/" element={<MainPage />}/>
       <Route path="/authorization" element={<AuthorizationPage />} />
       <Route path="/registration" element={<RegistrationPage />} />
-
+      <Route path="/game" element={<GamePage />} />
     </Routes>
   );
 }

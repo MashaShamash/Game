@@ -16,7 +16,7 @@ async function verifyAccessToken(req, res, next) {
       attributes: ['id', 'name', 'email'],
     });
 
-    res.locals.user = [user, game];
+    res.locals.user = {user, game};
 
     next();
   } catch (error) {

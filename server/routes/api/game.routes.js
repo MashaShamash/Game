@@ -4,14 +4,10 @@ const verifyAccessToken = require("../../middleware/verifyAccessToken");
 
 router.get("/", async (req, res) => {
   try {
-    const questions = await Game.findAll({ where: req.query, order: [["id", "ASC"]] });
+    const games = await Game.findAll({ order: [["id", "ASC"]] });
     res
       .status(200)
-      .cookie("cookie", "kek", {
-        maxAge: 9000,
-        httpOnly: true,
-      })
-      .json({ message: "success", questions });
+      .json({ message: "success", games });
   } catch ({ message }) {
     res.status(500).json({ error: message });
   }

@@ -11,7 +11,7 @@ const gameLineRoutes = require("./api/gameLine.routes");
 router.use('/auth', authRoutes);
 router.use('/tokens', tokensRoutes);
 router.use("/question", questionRoutes);
-router.use("/game", gameRoutes);
+router.use("/games", gameRoutes);
 router.use("/themes", themesRoutes);
 router.use("/gameLineRoutes", gameLineRoutes);
 module.exports = router;
