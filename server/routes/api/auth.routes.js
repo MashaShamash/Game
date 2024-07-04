@@ -1,5 +1,5 @@
 const router = require("express").Router();
-
+const generateTokens = require('../../utils/authUtils');
 router.post("/registration", async (req, res) => {
   try {
     const { name, email, password } = req.body;
