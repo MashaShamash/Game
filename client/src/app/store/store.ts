@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import authSlice from '../../entities/users/authSlice';
-import gameSlice from '../../entities/game/gameSlice';
+import gamesSlice from '../../entities/game/gameSlice';
 
 const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
-    game: gameSlice.reducer
+    games: gamesSlice.reducer
   },
 });
 

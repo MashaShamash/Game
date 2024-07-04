@@ -32,7 +32,7 @@ router.get("/gameLineId", async (req, res) => {
 router.post("/", verifyAccessToken, async (req, res) => {
   try {
     const { user, gameId } = res.locals;
-    const { gameId, questionId, gameLineStatus } = req.body;
+    const { questionId, gameLineStatus } = req.body;
     const gameLine = await GameLine.create({
       gameId,
       questionId,
