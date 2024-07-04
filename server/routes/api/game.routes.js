@@ -66,3 +66,4 @@ router.put("/:gameId", verifyAccessToken, async (req, res) => {
 });
 
 module.exports = router;
+

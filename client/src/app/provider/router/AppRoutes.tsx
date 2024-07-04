@@ -10,6 +10,7 @@ function AppRoutes(): JSX.Element {
       <Route path="/" element={<MainPage />}/>
       <Route path="/authorization" element={<AuthorizationPage />} />
       <Route path="/registration" element={<RegistrationPage />} />
+
     </Routes>
   );
 }
