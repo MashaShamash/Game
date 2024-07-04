@@ -69,11 +69,13 @@ function RegistrationPage(): JSX.Element {
       <br />
       <div className="button-container">
         <Button type="submit" theme={ThemeButton.PRIMARY}>
-          Sign up
+          Войти
         </Button>
-        <Link to="/sign-in" className="login-button">
-          Sign in
-        </Link>
+        <Button type="button" theme={ThemeButton.PRIMARY}>
+          <Link to="/authorization" className="login-button">
+            Регистрация
+          </Link>
+        </Button>
       </div>
     </form>
   );
