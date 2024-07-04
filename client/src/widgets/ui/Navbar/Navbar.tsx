@@ -1,11 +1,20 @@
 import React from 'react';
 
 import { NavLink } from 'react-router-dom';
-
+import type {RootState} from '../../../app/store/store'
 import './Navbar.css';
+import { useAppDispatch, useAppSelector } from '../../../app/store/store';
+import { logoutThunk } from '../../../entities/users/authSlice';
 
 function Navbar(): JSX.Element {
-  let user = false;
+  const { user } = useAppSelector((state: RootState) => state.auth);
+  const dispatch = useAppDispatch();
+
+  const onHandleLogout = (e: React.MouseEvent<HTMLAnchorElement>): void => {
+    e.preventDefault(); // отменяем переход по ссылке
+    void dispatch(logoutThunk());
+  };
+
   return (
     <nav className="Navbar">
       <ul>
@@ -14,7 +23,9 @@ function Navbar(): JSX.Element {
         </li>
         {user ? (
           <li>
-            <NavLink to="/">Выйти</NavLink>
+            <NavLink to="/" onClick={onHandleLogout}>
+              Выйти
+            </NavLink>
           </li>
         ) : (
           <>

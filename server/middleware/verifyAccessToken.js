@@ -1,11 +1,11 @@
 require("dotenv").config();
-const { User, Game } = require('../db/models');
 const jwt = require("jsonwebtoken");
+const { User, Game } = require('../db/models');
 
 async function verifyAccessToken(req, res, next) {
   try {
     const accessToken = req.headers.authorization.split(" ")[1];
-    const { user } = jwt.verify(accessToken, process.env.ACCESS_TOKEN);
+    let { user } = jwt.verify(accessToken, process.env.ACCESS_TOKEN);
 
     let game = await Game.findOne({
       where: { gameStatus: true}
