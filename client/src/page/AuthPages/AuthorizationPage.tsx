@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import './styles/auth.css';
 import { useAppDispatch } from '../../app/store/store';
 import { authorizationThunk } from '../../entities/users/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 function AuthorizationPage(): JSX.Element {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -13,6 +15,7 @@ function AuthorizationPage(): JSX.Element {
     dispatch(authorizationThunk({ email, password })).catch((error) => {
       console.log(error);
     });;
+    navigate('/');
   };
 
   return (
@@ -31,7 +34,7 @@ function AuthorizationPage(): JSX.Element {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button type="submit">login</button>
+      <button type="submit">Войти</button>
     </form>
   );
 }

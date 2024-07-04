@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Theme } = require("../../");
+const { Theme } = require("../../db/models");
 
 router.get("/", async (req, res) => {
   try {
@@ -25,4 +25,7 @@ router.get("/themeId", async (req, res) => {
     res.status(500).json({ error: message });
   }
 });
+
+
 module.exports = router;
+

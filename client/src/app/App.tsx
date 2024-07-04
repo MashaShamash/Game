@@ -3,6 +3,7 @@ import Navbar from '../widgets/ui/Navbar/Navbar';
 import AppRoutes from './provider/router/AppRoutes';
 import { useAppDispatch } from './store/store';
 import { refreshTokens } from '../entities/users/authSlice';
+import './styles/index.css';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();

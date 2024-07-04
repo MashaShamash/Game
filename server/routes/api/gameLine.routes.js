@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const { GameLine, Question } = require("../../db/models");
 
+const verifyAccessToken = require("../../middleware/verifyAccessToken");
+
 
 router.get("/", async (req, res) => {
   try {
@@ -63,9 +65,11 @@ router.put("/:gameLineId", verifyAccessToken, async (req, res) => {
       return;
     }
 
+
     res.status(400).json({ message: "Ошибка!" });
   } catch ({ message }) {
     res.status(500).json({ error: message });
   }
 });
+
 module.exports = router;

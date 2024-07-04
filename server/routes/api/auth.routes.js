@@ -1,5 +1,8 @@
 const router = require("express").Router();
 const generateTokens = require('../../utils/authUtils');
+const bcrypt = require('bcrypt');
+const { User } = require('../../db/models');
+
 router.post("/registration", async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -8,7 +11,11 @@ router.post("/registration", async (req, res) => {
       return;
     }
 
-    const userInDb = await UserService.getUserByEmail(email);
+    const userInDb = await User.findOne({
+      where: {
+        email,
+      },
+    });
     if (userInDb) {
       res
         .status(400)
@@ -16,17 +23,17 @@ router.post("/registration", async (req, res) => {
       return;
     }
     const hashPassword = await bcrypt.hash(password, 10);
-
-    const user = await UserService.createUser({
+    const user = await User.create({
       name,
       email,
       password: hashPassword,
     });
 
     const { accessToken, refreshToken } = generateTokens({ user });
-
+    delete user.dataValues.password;
     if (user) {
         //delete user.password;
+        delete user.dataValues.password;
         console.log(user);
       res
         .status(201)
@@ -48,7 +55,11 @@ router.post("/authorization", async (req, res) => {
       res.status(400).json({ message: "Заполните все поля" });
       return;
     }
-    const user = await UserService.getUserByEmail(email);
+    const user = await User.findOne({
+      where: {
+        email,
+      },
+    });
 
     if (user) {
       const isCompare = await bcrypt.compare(password, user.password);

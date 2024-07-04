@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button, { ThemeButton } from '../../shared/ui/Button/Button';
 import './styles/auth.css';
 import { useAppDispatch } from '../../app/store/store';
 import { registrationThunk } from '../../entities/users/authSlice';
 
 function RegistrationPage(): JSX.Element {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -18,6 +19,7 @@ function RegistrationPage(): JSX.Element {
       dispatch(registrationThunk({ name, email, password })).catch((error) => {
         console.log(error);
       });
+      navigate('/');
     }
   };
 
@@ -69,11 +71,13 @@ function RegistrationPage(): JSX.Element {
       <br />
       <div className="button-container">
         <Button type="submit" theme={ThemeButton.PRIMARY}>
-          Sign up
+          Войти
         </Button>
-        <Link to="/sign-in" className="login-button">
-          Sign in
-        </Link>
+        <Button type="button" theme={ThemeButton.PRIMARY}>
+          <Link to="/authorization" className="login-button">
+            Регистрация
+          </Link>
+        </Button>
       </div>
     </form>
   );
