@@ -6,7 +6,7 @@ router.get("/", async (req, res) => {
     const users = usersFromDb.map((user) => delete user.password);
     res.status(200).json({ message: "success", users });
   } catch ({ message }) {
-    res.status(500), json({ error: message });
+    res.status(500).json({ error: message });
   }
 });
 
