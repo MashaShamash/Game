@@ -1,3 +1,5 @@
+
+
 import React from 'react';
 import './styles/gamePage.css';
 import { type RootState, useAppSelector } from '../../app/store/store';
@@ -16,3 +18,4 @@ console.log(games);
 }
 
 export default GamePage;
+
