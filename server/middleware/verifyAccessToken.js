@@ -8,8 +8,13 @@ async function verifyAccessToken(req, res, next) {
     let { user } = jwt.verify(accessToken, process.env.ACCESS_TOKEN);
 
     let game = await Game.findOne({
-      where: { userId: user.id, gameStatus: true },
+      where: { userId: user.id, gameStatus: false },
     });
+    
+    if (game) {
+      // res.locals.user.gameId = game.dataValues.id;
+      res.locals.gameId = game.dataValues.id
+    }
 
     // user = await User.findOne({
     //   where: { id: user.id },
@@ -17,8 +22,6 @@ async function verifyAccessToken(req, res, next) {
     // });
 
     res.locals.user = user;
-    res.locals.user.gameId = game.id;
-    res.locals.game = game;
 
     next();
   } catch (error) {

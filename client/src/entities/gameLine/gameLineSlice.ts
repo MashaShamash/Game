@@ -23,7 +23,7 @@ const gameLineSlice = createSlice({
       state.gameLine = action.payload;
     }).addCase(updateGameLineThunk.fulfilled, (state, asction) => {
       state.gameLine = state.gameLine.map((item) =>
-        item.id === asction.payload.id? asction.payload : item,
+        item.id === asction.payload.id ? asction.payload : item,
       );
     })
   },

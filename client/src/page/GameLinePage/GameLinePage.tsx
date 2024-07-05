@@ -10,7 +10,6 @@ type GameLinePageProps = {
   gameline: GameLine;
 };
 function GameLinePage({ gameline }: GameLinePageProps): JSX.Element {
-  console.log(gameline);
   const [ancser, setAnsver] = useState('');
   const [r, setR] = useState(false);
   const [nr, setNr] = useState(false);
@@ -18,7 +17,6 @@ function GameLinePage({ gameline }: GameLinePageProps): JSX.Element {
   const [newAnswer, setNewAswer] = useState(false);
   const [checkAnswer, setCheckAnswer] = useState(true);
   const dispatch = useAppDispatch();
-console.log(ancser);
 
   // const onHandleClick = (): void => {
   //   setActive((prev) => !prev);
@@ -31,27 +29,44 @@ console.log(ancser);
   //     void dispatch(updateGameLineThunk({ id: gameline.id, body: gameline.gameLineStatus }));
   //   }
   // };
+console.log(ancser);
 
   const onHandleSubmitQuiz = (e) => {
     e.preventDefault();
+    
     setCheckAnswer((prev) => !prev);
+    
     if (gameline.Question.answer.trim().toLowerCase() === ancser.trim().toLowerCase()) {
+      console.log('Правда');
       setR(true);
-    } else { setNr(true)}
+    } else {
+      console.log('Лож');
+      
+      setNr(true);
+    }
+    console.log(gameline);
+    
     void dispatch(updateGameLineThunk({ id: gameline.id, body: gameline.gameLineStatus }));
   };
 
   return (
     <div className=" GameLinePage">
       {r && <h2>Правильно!</h2>}
-      {nr && <div><h2>Не правильно!</h2>
-      <h3 className='ansverNo'>Правильный ответ: {gameline.Question.answer}</h3>
-        </div>}
+      {nr && (
+        <div>
+          <h2>Не правильно!</h2>
+          <h3 className="ansverNo">Правильный ответ: {gameline.Question.answer}</h3>
+        </div>
+      )}
       <img src={gameline.Question.img} />
       {checkAnswer && (
         <form className="questionForm" onSubmit={onHandleSubmitQuiz}>
-          <input type="text" placeholder="Ответ"         value={ancser}
-        onChange={(e) => setAnsver(e.target.value)} />
+          <input
+            type="text"
+            placeholder="Ответ"
+            value={ancser}
+            onChange={(e) => setAnsver(e.target.value)}
+          />
           <button type="submit">Ответить</button>
         </form>
       )}

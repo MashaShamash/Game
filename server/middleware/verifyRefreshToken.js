@@ -8,8 +8,14 @@ async function verifyRefreshToken(req, res, next) {
     let { user } = jwt.verify(refresh, process.env.REFRESH_TOKEN);
 
     let game = await Game.findOne({
-      where: { userId: user.id, gameStatus: true },
+      where: { userId: user.id, gameStatus: false },
     });
+    
+    if (game) {
+      // console.log(game.dataValues);
+      // res.locals.user.gameId = game.dataValues.id;
+      res.locals.gameId = game.dataValues.id
+    }
 
     // user = await User.findOne({
     //   where: { id: user.id },
@@ -17,12 +23,11 @@ async function verifyRefreshToken(req, res, next) {
     // });
 
     res.locals.user = user;
-    res.locals.user.gameId = game.id;
-    res.locals.game = game;
 
     next();
   } catch (error) {
     console.log("Invalid refresh token");
+    console.log(error);
     res.clearCookie("refreshToken").sendStatus(401);
   }
 }
