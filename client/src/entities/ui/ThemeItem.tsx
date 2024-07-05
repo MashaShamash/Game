@@ -17,8 +17,8 @@ function ThemeItem({ theme }: ThemeItemProps): JSX.Element {
       <div>
         {gameLine &&
           gameLine
-            .filter((gameLine) => gameLine.Question.themeId === theme.id)
-            .map((gameL) => <GameLinePage gameL={gameL} key={theme.id} />)}
+            .filter((gameLineTheme) => gameLineTheme.Question.themeId === theme.id)
+            .map((gameline) => <GameLinePage gameline={gameline} key={theme.id} />)}
       </div>
     </div>
   );
