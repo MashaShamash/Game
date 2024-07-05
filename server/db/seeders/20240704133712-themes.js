@@ -7,14 +7,14 @@ module.exports = {
       "Themes",
       [
         {
-          title: 'stul',
+          title: 'эмоции',
          
         },
         {
-          title: 'styl',
+          title: 'почти милахи',
         },
         {
-          title: 'pool',
+          title: 'безумный - безумный мир',
         },
              ],
       {}
