@@ -2,21 +2,17 @@ import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import authSlice from '../../entities/users/authSlice';
 import themeSlice from '../../entities/theme/themeSlice';
-import gamesSlice from '../../entities/game/gameSlice';
 import questionsSlice from '../../entities/question/questionSlice';
-
+import gamesSlice from '../../entities/game/gameSlice';
+import gameLineSlice from '../../entities/gameLine/gameLineSlice';
 
 const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
-
- 
-    questions: questionsSlice.reducer
-
-
-    themes: themeSlice.reducer
-
-
+    questions: questionsSlice.reducer,
+    themes: themeSlice.reducer,
+    currentGame: gamesSlice.reducer,
+    gameLine: gameLineSlice.reducer,
   },
 });
 
