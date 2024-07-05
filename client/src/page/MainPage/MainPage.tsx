@@ -4,12 +4,20 @@ import Button, { ThemeButton } from '../../shared/ui/Button/Button';
 import { useAppSelector, type RootState } from '../../app/store/store';
 import ThemePage from '../ThemePage/ThemePage';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { gameStartThunk } from '../../entities/game/gameSlice';
 
 function MainPage(): JSX.Element {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [active, setActive] = useState(false);
   const { user } = useAppSelector((state: RootState) => state.auth);
-  console.log(user);
+  
+  const  onHandleCreate = (e): void => {
+    e.preventDefault();
+    void dispatch(gameStartThunk());
+    navigate('/game');
+  }
   return (
     <div className="MainPage">
       <h1>Main Page</h1>
@@ -19,7 +27,7 @@ function MainPage(): JSX.Element {
           <Button
             type="button"
             theme={ThemeButton.PRIMARY}
-            onClick={navigate('/game')}
+            onClick={onHandleCreate}
           >
             Начать игру
           </Button>

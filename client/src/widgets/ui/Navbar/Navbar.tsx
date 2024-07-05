@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { NavLink } from 'react-router-dom';
-import type {RootState} from '../../../app/store/store'
+import type { RootState } from '../../../app/store/store';
 import './Navbar.css';
 import { useAppDispatch, useAppSelector } from '../../../app/store/store';
 import { logoutThunk } from '../../../entities/users/authSlice';

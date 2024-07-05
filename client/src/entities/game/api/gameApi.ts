@@ -25,7 +25,7 @@ class GameApi {
   }> => {
     try {
       const response: AxiosResponse<{ message: 'success'; game: Game; gameLines: GameLine[] }> =
-        await axiosInstance.post('/games/gameStart');
+        await axiosInstance.post('/games/gameStart/');
       return response.data;
     } catch (error) {
       if (error) {
