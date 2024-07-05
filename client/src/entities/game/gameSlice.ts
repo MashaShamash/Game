@@ -17,15 +17,14 @@ const initialState: StateGames = {
 export const gamesAllThunk = createAsyncThunk('load/games', () => GameApi.getAllGames());
 
 const gamesSlice = createSlice({
-    name: 'games',
+  name: 'games',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder
-     .addCase(gamesAllThunk.fulfilled, (state, action) => {
-        state.games = action.payload;
-      })
-  }
-})
+    builder.addCase(gamesAllThunk.fulfilled, (state, action) => {
+      state.games = action.payload;
+    });
+  },
+});
 
 export default gamesSlice;
