@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import './styles/gamePage.css';
 import { type RootState, useAppSelector, useAppDispatch } from '../../app/store/store';
 import { gameStartThunk } from '../../entities/game/gameSlice';
+import ThemePage from '../ThemePage/ThemePage';
 
 function GamePage(): JSX.Element {
   const { currentGame } = useAppSelector((state: RootState) => state.currentGame);
@@ -13,9 +14,8 @@ function GamePage(): JSX.Element {
   return (
     <div className="GamePage">
       <div>
-        <h1>Тема</h1>
+        <ThemePage />
       </div>
-      <div></div>
     </div>
   );
 }

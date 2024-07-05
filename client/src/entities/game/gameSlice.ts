@@ -26,7 +26,7 @@ const gamesSlice = createSlice({
       //   state.games = action.payload;
       // })
       .addCase(gameStartThunk.fulfilled, (state, action) => {
-        state.currentGame = action.payload;
+        state.currentGame = action.payload.game;
       });
   },
 });

@@ -3,12 +3,13 @@ const { GameLine, Question, Game } = require("../../db/models");
 
 const verifyAccessToken = require("../../middleware/verifyAccessToken");
 
-router.get("/", async (req, res) => {
+router.get("/", verifyAccessToken, async (req, res) => {
   try {
+    const { user, game } = res.locals;
     const gameLine = await GameLine.findAll({
-      where: { gameId: res.locals.user.gameId },
-      include: Question,
-      order: [["id", "ASC"]],
+      include: { model: Question },
+      where: { gameId: game.id },
+      // order: [["id", "ASC"]],
     });
     res.status(200).json({ message: "success", gameLine });
   } catch ({ message }) {
@@ -30,7 +31,6 @@ router.post("/", verifyAccessToken, async (req, res) => {
   try {
     const { user, gameId } = res.locals;
 
-
     const { questionId, gameLineStatus } = req.body;
 
     const gameLine = await GameLine.create({
@@ -50,13 +50,12 @@ router.post("/", verifyAccessToken, async (req, res) => {
 router.put("/:gameLineId", verifyAccessToken, async (req, res) => {
   try {
     const { user } = res.locals;
-
     const { gameLineId } = req.params;
     const { gameId, questionId, gameLineStatus } = req.body;
 
     const result = await GameLine.update(
       { gameId, questionId, gameLineStatus },
-      { where: { id: gameLineId, questionId: question.id } }
+      { where: { userId: user.id } }
     );
 
     if (result[0] > 0) {

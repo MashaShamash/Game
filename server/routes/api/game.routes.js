@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/gameId", async (req, res) => {
+router.get("/:gameId", async (req, res) => {
   try {
     const { gameId } = res.params;
     const question = await Game.findOne({ where: { id: gameId } });
