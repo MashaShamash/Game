@@ -5,19 +5,20 @@ const verifyAccessToken = require("../../middleware/verifyAccessToken");
 
 router.get("/", verifyAccessToken, async (req, res) => {
   try {
-    const { user, game } = res.locals;
+    console.log(1);
+    // console.log(res.locals, 'Wowowowodowdwd');
     const gameLine = await GameLine.findAll({
-      include: { model: Question },
-      where: { gameId: game.id },
-      // order: [["id", "ASC"]],
+      where: { gameId: res.locals.user.gameId },
+      include: Question,
     });
+    // console.log(gameLine);
     res.status(200).json({ message: "success", gameLine });
   } catch ({ message }) {
     res.status(500).json({ error: message });
   }
 });
 
-router.get("/gameLineId", async (req, res) => {
+router.get("/gameLineId", verifyAccessToken, async (req, res) => {
   try {
     const { gameLineId } = res.params;
     const gameLine = await GameLine.findOne({ where: { id: gameLineId } });
