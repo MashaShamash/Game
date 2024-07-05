@@ -16,8 +16,11 @@ function App(): JSX.Element {
   console.log(questions);
   
   useEffect(() => {
+
+
     void dispatch(getAllThemeThunk());
     dispatch(refreshTokens()).catch(console.log);
+
     void dispatch(gamesAllThunk())
     void dispatch(getQuestionsThunk())
   }, [dispatch]);

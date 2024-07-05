@@ -8,6 +8,7 @@ import ThemePage from '../ThemePage/ThemePage';
 function MainPage(): JSX.Element {
   const [active, setActive] = useState(false);
   const { user } = useAppSelector((state: RootState) => state.auth);
+  console.log(user);
   return (
     <div className="MainPage">
       <h1>Main Page</h1>
