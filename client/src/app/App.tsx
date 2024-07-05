@@ -7,17 +7,21 @@ import './styles/index.css';
 import { gamesAllThunk } from '../entities/game/gameSlice';
 import { getQuestionsThunk } from '../entities/question/questionSlice';
 
+import { getAllThemeThunk } from '../entities/theme/themeSlice';
+
+
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
   const { questions } = useAppSelector((state: RootState) => state.questions);
   console.log(questions);
   
   useEffect(() => {
+    void dispatch(getAllThemeThunk());
     dispatch(refreshTokens()).catch(console.log);
     void dispatch(gamesAllThunk())
     void dispatch(getQuestionsThunk())
   }, [dispatch]);
-  
+
   return (
     <div className="app">
       <Navbar />
