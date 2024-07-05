@@ -3,8 +3,6 @@ import { Route, Routes } from 'react-router-dom';
 import AuthorizationPage from '../../../page/AuthPages/AuthorizationPage';
 import RegistrationPage from '../../../page/AuthPages/RegistrationPage';
 import MainPage from '../../../page/MainPage/MainPage';
-
-import GamePage from '../../../page/GamePage/GamePage';
 import ErrorPage from '../../../page/ErrorPage/ErrorPage';
 import ThemePage from '../../../page/ThemePage/ThemePage';
 import GamePage from '../../../page/GamePage/GamePage';
