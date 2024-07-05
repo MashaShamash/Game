@@ -1,11 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { GameLine } from './types/gameLineTypes';
+import type { GameLine } from './types/gameLineTypes';
 import GameLineApi from './api/gameLineApi';
 
 type StateGameLine = {
   gameLine: GameLine[];
-//   error: string | undefined;
-//   looding: boolean;
 };
 const initialState: StateGameLine = {
   gameLine: [],

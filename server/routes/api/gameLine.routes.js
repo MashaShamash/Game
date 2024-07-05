@@ -32,7 +32,6 @@ router.post("/", verifyAccessToken, async (req, res) => {
   try {
     const { user, gameId } = res.locals;
 
-
     const { questionId, gameLineStatus } = req.body;
 
     const gameLine = await GameLine.create({
@@ -52,13 +51,12 @@ router.post("/", verifyAccessToken, async (req, res) => {
 router.put("/:gameLineId", verifyAccessToken, async (req, res) => {
   try {
     const { user } = res.locals;
-
     const { gameLineId } = req.params;
     const { gameId, questionId, gameLineStatus } = req.body;
 
     const result = await GameLine.update(
       { gameId, questionId, gameLineStatus },
-      { where: { id: gameLineId, questionId: question.id } }
+      { where: { userId: user.id } }
     );
 
     if (result[0] > 0) {
