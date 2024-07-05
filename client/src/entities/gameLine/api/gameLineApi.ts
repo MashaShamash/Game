@@ -5,7 +5,12 @@ import type { GameLine } from '../types/gameLineTypes';
 class GameLineApi {
   static getAllGameLine = async (): Promise<GameLine[]> => {
     const response: AxiosResponse<{ message: string; gameLine: GameLine[] }> =
-      await axiosInstance.get('/gameLines');
+      await axiosInstance.get('/gameLine');
+    return response.data.gameLine;
+  };
+
+  static updateGameLine = async (obj) => {
+    const response = await axiosInstance.put(`/gameLine/${obj.id}`, obj.body);
     return response.data.gameLine;
   };
 }

@@ -17,6 +17,7 @@ async function verifyRefreshToken(req, res, next) {
     // });
 
     res.locals.user = user;
+    res.locals.user.gameId = game.id;
     res.locals.game = game;
 
     next();

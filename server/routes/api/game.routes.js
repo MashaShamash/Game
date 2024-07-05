@@ -7,7 +7,6 @@ router.get("/", async (req, res) => {
     const games = await Game.findAll({ order: [["id", "ASC"]] });
 
     res.status(200).json({ message: "success", games });
-
   } catch ({ message }) {
     res.status(500).json({ error: message });
   }
@@ -30,7 +29,7 @@ router.get("/findCurrentGame", verifyAccessToken, async (req, res) => {
       where: { id: game.id },
       include: {
         model: GameLine,
-        include: [Question],
+        include: Question,
       },
     });
     res.status(200).json({ message: "success", findGame });
@@ -44,22 +43,25 @@ router.post("/gameStart", verifyAccessToken, async (req, res) => {
     const { user } = res.locals;
     const game = await Game.create({
       userId: user.id,
-      gameStatus: false,
+      gameStatus: true,
       point: 0,
     });
     if (game) {
       const questions = await Question.findAll();
-      questions.forEach((question) =>
+      questions.forEach((question) => {
         GameLine.create({
           gameId: game.id,
           questionId: question.id,
           gameLineStatus: false,
-        })
-      );
+        });
+      });
     }
-    setTimeout(async () => {
+    const timeOut = setTimeout(async () => {
       const gameLines = await GameLine.findAll({
-        where: { gameId: game.id, include: Question },
+        where: {
+          gameId: game.id,
+        },
+        include: Question,
       });
       res.locals.game = game;
       res.locals.user = user;

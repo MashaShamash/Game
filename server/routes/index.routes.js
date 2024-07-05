@@ -13,6 +13,6 @@ router.use('/tokens', tokensRoutes);
 router.use("/questions", questionRoutes);
 router.use("/games", gameRoutes);
 router.use("/themes", themesRoutes);
-router.use("/gameLineRoutes", gameLineRoutes);
+router.use("/gameLine", gameLineRoutes);
 module.exports = router;
 
