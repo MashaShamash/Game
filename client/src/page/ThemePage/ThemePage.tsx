@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../../app/store/store';
-// import { useAppDispatch } from '../../app/store/store';
 import ThemeItem from '../../entities/ui/ThemeItem';
 
 function ThemePage(): JSX.Element {

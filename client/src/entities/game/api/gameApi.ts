@@ -7,7 +7,7 @@ class GameApi {
   static getAllGames = async (): Promise<Game[]> => {
     try {
       const response: AxiosResponse<{ message: 'success'; games: Game[] }> =
-        await axiosInstance.get('/games/');
+        await axiosInstance.get('/games');
       return response.data.games;
     } catch (error) {
       if (error) {
@@ -18,10 +18,14 @@ class GameApi {
     }
   };
 
-  static createStartGame = async (): Promise<{ message: 'success'; game: Game; gameLines: GameLine[]}> => {
+  static createStartGame = async (): Promise<{
+    message: 'success';
+    game: Game;
+    gameLines: GameLine[];
+  }> => {
     try {
       const response: AxiosResponse<{ message: 'success'; game: Game; gameLines: GameLine[] }> =
-        await axiosInstance.post('/gameStart/');
+        await axiosInstance.post('/games/gameStart');
       return response.data;
     } catch (error) {
       if (error) {
@@ -32,6 +36,5 @@ class GameApi {
     }
   };
 }
-
 
 export default GameApi;
