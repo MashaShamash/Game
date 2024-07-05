@@ -6,6 +6,7 @@ import { useAppSelector, type RootState } from '../../app/store/store';
 
 function MainPage(): JSX.Element {
   const { user } = useAppSelector((state: RootState) => state.auth);
+  console.log(user);
   return (
     <div className="MainPage">
       <h1>Главная страница</h1>

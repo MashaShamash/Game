@@ -10,7 +10,7 @@ function App(): JSX.Element {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(refreshTokens()).catch(console.log);
+    void dispatch(refreshTokens());
     void dispatch(gamesAllThunk())
   }, [dispatch]);
   
