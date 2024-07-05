@@ -7,10 +7,6 @@ router.get("/", async (req, res) => {
     const questions = await Game.findAll({ where: req.query, order: [["id", "ASC"]] });
     res
       .status(200)
-      .cookie("cookie", "kek", {
-        maxAge: 9000,
-        httpOnly: true,
-      })
       .json({ message: "success", questions });
   } catch ({ message }) {
     res.status(500).json({ error: message });
