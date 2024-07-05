@@ -1,19 +1,16 @@
 const router = require("express").Router();
-const { GameLine, Question } = require("../../db/models");
+const { GameLine, Question, Game } = require("../../db/models");
 
 const verifyAccessToken = require("../../middleware/verifyAccessToken");
-
 
 router.get("/", async (req, res) => {
   try {
     const gameLine = await GameLine.findAll({
       where: { gameId: res.locals.user.gameId },
       include: Question,
-      order: [["id", "ASC"]]
+      order: [["id", "ASC"]],
     });
-    res
-      .status(200)
-      .json({ message: "success", gameLine });
+    res.status(200).json({ message: "success", gameLine });
   } catch ({ message }) {
     res.status(500).json({ error: message });
   }
@@ -32,7 +29,10 @@ router.get("/gameLineId", async (req, res) => {
 router.post("/", verifyAccessToken, async (req, res) => {
   try {
     const { user, gameId } = res.locals;
+
+
     const { questionId, gameLineStatus } = req.body;
+
     const gameLine = await GameLine.create({
       gameId,
       questionId,
@@ -49,7 +49,7 @@ router.post("/", verifyAccessToken, async (req, res) => {
 
 router.put("/:gameLineId", verifyAccessToken, async (req, res) => {
   try {
-    const { user} = res.locals;
+    const { user } = res.locals;
 
     const { gameLineId } = req.params;
     const { gameId, questionId, gameLineStatus } = req.body;
@@ -65,7 +65,6 @@ router.put("/:gameLineId", verifyAccessToken, async (req, res) => {
       res.status(200).json({ message: "success", gameLine });
       return;
     }
-
 
     res.status(400).json({ message: "Ошибка!" });
   } catch ({ message }) {

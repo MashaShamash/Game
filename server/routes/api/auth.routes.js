@@ -30,11 +30,8 @@ router.post("/registration", async (req, res) => {
     });
 
     const { accessToken, refreshToken } = generateTokens({ user });
-    delete user.dataValues.password;
     if (user) {
-        //delete user.password;
         delete user.dataValues.password;
-        console.log(user);
       res
         .status(201)
         .cookie("refresh", refreshToken, { httpOnly: true })
