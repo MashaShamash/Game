@@ -4,10 +4,7 @@ const generateTokens = require("../../utils/authUtils");
 
 router.get("/refresh", verifyRefreshToken, (req, res) => {
   const { user } = res.locals;
-  console.log(res.locals);
-  console.log(user, 'я юзер');
-  const { accessToken, refreshToken } = generateTokens(user);
-  console.log({ accessToken, refreshToken });
+  const { accessToken, refreshToken } = generateTokens({user});
   res
     .cookie("refresh", refreshToken, { httpOnly: true })
     .status(200)

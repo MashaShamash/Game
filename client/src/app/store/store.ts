@@ -5,18 +5,12 @@ import themeSlice from '../../entities/theme/themeSlice';
 import gamesSlice from '../../entities/game/gameSlice';
 import questionsSlice from '../../entities/question/questionSlice';
 
-
 const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
-
- 
-    questions: questionsSlice.reducer
-
-
-    themes: themeSlice.reducer
-
-
+    games: gamesSlice.reducer,
+    questions: questionsSlice.reducer,
+    themes: themeSlice.reducer,
   },
 });
 
