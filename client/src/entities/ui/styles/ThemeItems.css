@@ -1,0 +1,18 @@
+.ThemeItem-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.ThemeItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ThemeItem h2 {
+    font-size: 25px;
+    margin-right: 20px;
+}

@@ -43,7 +43,7 @@ router.post("/gameStart", verifyAccessToken, async (req, res) => {
     const { user } = res.locals;
     const game = await Game.create({
       userId: user.id,
-      gameStatus: true,
+      gameStatus: false,
       point: 0,
     });
     if (game) {
