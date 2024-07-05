@@ -9,19 +9,14 @@ type StateQuestions = {
 const initialState: StateQuestions = {
   questions: undefined,
 };
-// создал действие, по котору загрузяться все фильмы
 export const getQuestionsThunk = createAsyncThunk('load/questions', () =>
   QuestionApi.getAllQuestions(),
 );
-
 const questionsSlice = createSlice({
   name: 'questions',
   initialState,
-  // естб синхронные редюсеры
   reducers: {},
-  // асинк редюсер
   extraReducers: (builder) => {
-    //                                      {movies: []}
     builder.addCase(getQuestionsThunk.fulfilled, (state, action) => {
       state.questions = action.payload;
     });

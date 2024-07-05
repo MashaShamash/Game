@@ -1,21 +1,23 @@
-
-
-import React from 'react';
+import React, { useEffect } from 'react';
 import './styles/gamePage.css';
-import { type RootState, useAppSelector } from '../../app/store/store';
+import { type RootState, useAppSelector, useAppDispatch } from '../../app/store/store';
+import { gameStartThunk } from '../../entities/game/gameSlice';
 
 function GamePage(): JSX.Element {
-    const { games } = useAppSelector((state: RootState) => state.games);
-console.log(games);
-
+  const { currentGame } = useAppSelector((state: RootState) => state.currentGame);
+  console.log(currentGame);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    void dispatch(gameStartThunk());
+  }, []);
   return (
-<div className='GamePage'>
-    <div>
-      <h1>Тема</h1>
+    <div className="GamePage">
+      <div>
+        <h1>Тема</h1>
+      </div>
+      <div></div>
     </div>
-</div>
   );
 }
 
 export default GamePage;
-
