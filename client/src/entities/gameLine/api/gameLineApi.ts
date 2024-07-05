@@ -6,6 +6,8 @@ class GameLineApi {
   static getAllGameLine = async (): Promise<GameLine[]> => {
     const response: AxiosResponse<{ message: string; gameLine: GameLine[] }> =
       await axiosInstance.get('/gameLine');
+      console.log(response);
+      
     return response.data.gameLine;
   };
 

@@ -5,13 +5,11 @@ const verifyAccessToken = require("../../middleware/verifyAccessToken");
 
 router.get("/", verifyAccessToken, async (req, res) => {
   try {
-    console.log(1);
-    // console.log(res.locals, 'Wowowowodowdwd');
     const gameLine = await GameLine.findAll({
-      where: { gameId: res.locals.user.gameId },
+      where: { gameId: res.locals.gameId },
       include: Question,
     });
-    // console.log(gameLine);
+    console.log(gameLine);
     res.status(200).json({ message: "success", gameLine });
   } catch ({ message }) {
     res.status(500).json({ error: message });
@@ -52,15 +50,15 @@ router.put("/:gameLineId", verifyAccessToken, async (req, res) => {
   try {
     const { user } = res.locals;
     const { gameLineId } = req.params;
-    const { gameId, questionId, gameLineStatus } = req.body;
-
+    console.log(gameLineId);
+    console.log(res.locals.gameId);
+    // const { gameId, questionId, gameLineStatus } = req.body;
     const result = await GameLine.update(
-      { gameId, questionId, gameLineStatus },
-      { where: { userId: user.id } }
+      { gameLineStatus: true },
+      { where: { questionId: +gameLineId, gameId: res.locals.gameId } }
     );
-
     if (result[0] > 0) {
-      const gameLine = await GameLine.findOne({ where: { id: gameLineId } });
+      const gameLine = await GameLine.findOne({ where: { id: +gameLineId } });
 
       res.status(200).json({ message: "success", gameLine });
       return;

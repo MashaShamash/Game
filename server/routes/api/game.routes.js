@@ -41,6 +41,7 @@ router.get("/findCurrentGame", verifyAccessToken, async (req, res) => {
 router.post("/gameStart", verifyAccessToken, async (req, res) => {
   try {
     const { user } = res.locals;
+    console.log(user);
     const game = await Game.create({
       userId: user.id,
       gameStatus: false,
